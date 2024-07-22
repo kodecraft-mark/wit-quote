@@ -1,0 +1,129 @@
+interface types {
+    use jabratech:common/types.{pair, currency, greeks, option-kind, side};
+    /**
+     * Represents a response to a quote request when successful
+     */
+    record quote-response {
+        code: string,
+        message: string,
+      }
+    /**
+     * Represents a response to a quote request when failed
+     */
+    record quote-error {
+        error: string,
+    }
+    /**
+     * Represents a record for a quote request creation
+     * - user-email: the email of the user requesting the quote
+     * - quotes: a list of quotes
+     */
+    record quote-request {
+        user-email: string,
+        quotes: list<quote>,
+    }
+    /**
+     * Represents a quote
+     * - instrument-name: the name of the instrument
+     * - quote-expiry: the expiry date of the quote
+     * - counter-party: the counter-party of the quote
+     * - option-kind: call or put
+     * - amount: the amount of the quote
+     * - spot: the spot price of the base currency
+     * - offstrike-percentage: the offstrike percentage
+     * - strike: the strike price of the currency
+     * - px-in-quote-ccy: premium in quote currency
+     * - px-in-base-ccy: premium in base currency
+     * - r2: the r2 value
+     * - r1: the r1 value
+     * - iv: the implied volatility
+     * - ttm: the time to maturity
+     * - side: buy or sell
+     * - quote-status: the status of the quote
+     * - quote-origin: the origin of the quote
+     * - party-a: the source counter-party
+     * - party-b: the destination counter-party
+     * - gtc: good till cancel
+     * - ccy: the currency eg. BTC
+     * - pair: the pair of the currency eg. BTC/USD
+     * - greeks: the generated greek values
+     * - group-id: the group id of the quote (self generated)
+     * - quote-id: the id of the quote (self generated)
+     * - payout-ccy: the payout currency (base or quote)
+     * - expiry-timestamp: the expiry timestamp of the trade
+     * - option-type: the type of the option ([default]european or american)
+     * - payout-ccy-ticker: the payout-ccy-ticker of the quote
+     */
+    record quote {
+        instrument-name: string,
+        quote-expiry: string,
+        counter-party: counter-party,
+        option-kind: option-kind,
+        amount: f64,
+        spot: f64,
+        offstrike-percentage: f64,
+        strike: f64,
+        px-in-quote-ccy: f64,
+        px-in-base-ccy: f64,
+        r2: f64,
+        r1: option<f64>,
+        iv: f64,
+        ttm: f64,
+        side: side,
+        quote-status: quote-status,
+        quote-origin: option<string>,
+        party-a: counter-party,
+        party-b: counter-party,
+        gtc: bool,
+        ccy: currency,
+        pair: pair,
+        greeks: greeks,
+        group-id: string,
+        quote-id: string,
+        payout-ccy: payout-ccy,
+        expiry-timestamp: string,
+        option-type: option-type,
+        payout-ccy-ticker: string
+    }
+    /**
+     * Represents a counterparty
+     * - id: the id of the counter-party
+     * - ticker: the ticker of the counter-party
+     * - name: the name of the counter-party
+     * - short-name: the short name of the counter-party
+     * - is-exchange: whether the counter-party is an exchange
+     */
+    record counter-party {
+        id: s32,
+        ticker: string,
+        name: string,
+        short-name: string,
+        is-exchange: bool,
+    }
+
+    enum quote-status {
+        active,
+        approved,
+        rejected,
+        expired,
+    }
+    enum payout-ccy {
+        base,
+        quote
+    }
+    enum option-type {
+        american,
+        european
+    }
+    /**
+     * Represents a quote approval request
+     * - user-email: the email of the user requesting the quote
+     * - status: the status of the quote
+     * - group-id: the group id of the quote to be approved or rejected
+     */
+    record quote-approval-request {
+        user-email: string,
+        status: quote-status,
+        group-id: string,
+    }
+}
