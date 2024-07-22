@@ -1,0 +1,5 @@
+interface quote-handler {
+  use types.{quote-response, quote-request, quote-error, quote-approval-request};
+  create: func(request: quote-request) -> result<quote-response, quote-error>;
+  approve: func(request: quote-approval-request) -> result<quote-response, quote-error>;
+}
