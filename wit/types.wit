@@ -30,7 +30,6 @@ interface types {
      * Represents a quote
      * - instrument-name: the name of the instrument
      * - quote-expiry: the expiry date of the quote
-     * - counter-party: the counter-party of the quote
      * - option-kind: call or put
      * - amount: the amount of the quote
      * - spot: the spot price of the base currency
@@ -59,7 +58,6 @@ interface types {
     record quote {
         instrument-name: string,
         quote-expiry: string,
-        counter-party: counter-party,
         option-kind: option-kind,
         amount: f64,
         spot: f64,
