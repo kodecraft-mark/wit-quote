@@ -30,6 +30,7 @@ interface types {
      * Represents a quote
      * - instrument-name: the name of the instrument
      * - quote-expiry: the expiry date of the quote
+     * - counterparty-id: the id of the source counterparty
      * - option-kind: call or put
      * - amount: the amount of the quote
      * - spot: the spot price of the base currency
@@ -43,6 +44,8 @@ interface types {
      * - ttm: the time to maturity
      * - side: buy or sell
      * - quote-status: the status of the quote
+     * - party-a: the source id of the counterparty
+     * - party-b: the target id of the counterparty
      * - quote-origin: the origin of the quote
      * - gtc: good till cancel
      * - ccy: the currency eg. BTC
@@ -58,6 +61,7 @@ interface types {
     record quote {
         instrument-name: string,
         quote-expiry: string,
+        counterparty-id: s8,
         option-kind: option-kind,
         amount: f64,
         spot: f64,
@@ -71,6 +75,8 @@ interface types {
         ttm: f64,
         side: side,
         quote-status: quote-status,
+        party-a: s8,
+        party-b: s8,
         quote-origin: option<string>,
         gtc: bool,
         ccy: currency,
