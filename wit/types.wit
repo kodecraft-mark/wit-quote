@@ -17,9 +17,13 @@ interface types {
      * Represents a record for a quote request creation
      * - user-email: the email of the user requesting the quote
      * - quotes: a list of quotes
+     * - party-a: source counterparty
+     * - party-b: list of target counterparties
      */
     record quote-request {
         user-email: string,
+        party-a: s8,
+        party-b: list<s8>,
         quotes: list<quote>,
     }
     /**
@@ -41,8 +45,6 @@ interface types {
      * - side: buy or sell
      * - quote-status: the status of the quote
      * - quote-origin: the origin of the quote
-     * - party-a: the source counter-party
-     * - party-b: the destination counter-party
      * - gtc: good till cancel
      * - ccy: the currency eg. BTC
      * - pair: the pair of the currency eg. BTC/USD
@@ -72,8 +74,6 @@ interface types {
         side: side,
         quote-status: quote-status,
         quote-origin: option<string>,
-        party-a: counter-party,
-        party-b: counter-party,
         gtc: bool,
         ccy: currency,
         pair: pair,
@@ -84,21 +84,6 @@ interface types {
         expiry-timestamp: string,
         option-type: option-type,
         payout-ccy-ticker: string
-    }
-    /**
-     * Represents a counterparty
-     * - id: the id of the counter-party
-     * - ticker: the ticker of the counter-party
-     * - name: the name of the counter-party
-     * - short-name: the short name of the counter-party
-     * - is-exchange: whether the counter-party is an exchange
-     */
-    record counter-party {
-        id: s32,
-        ticker: string,
-        name: string,
-        short-name: string,
-        is-exchange: bool,
     }
 
     enum quote-status {
