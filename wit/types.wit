@@ -17,13 +17,9 @@ interface types {
      * Represents a record for a quote request creation
      * - user-email: the email of the user requesting the quote
      * - quotes: a list of quotes
-     * - party-a: source counterparty
-     * - party-b: list of target counterparties
      */
     record quote-request {
         user-email: string,
-        party-a: s8,
-        party-b: list<s8>,
         quotes: list<quote>,
     }
     /**
