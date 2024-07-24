@@ -109,6 +109,6 @@ interface types {
     record quote-approval-request {
         user-email: string,
         status: quote-status,
-        group-id: string,
+        group-ids: list<string>,
     }
 }
